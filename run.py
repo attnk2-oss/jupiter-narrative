@@ -36,13 +36,12 @@ def main():
     parser.add_argument("--json", action="store_true", help="JSON output")
     parser.add_argument("--watch", action="store_true", help="Continuous monitoring")
     parser.add_argument("--interval", type=int, default=60, help="Watch interval in seconds")
-    parser.add_argument("--live", action="store_true", help="Use live API (default: mock)")
+    parser.add_argument("--live", action="store_true", help="Use live Jupiter Quote API for portfolio routes")
     args = parser.parse_args()
 
     config = Config.from_env()
-    mock = not args.live
-    engine = NarrativeEngine(config, mock=mock)
-    optimizer = PortfolioOptimizer(config, mock=mock)
+    engine = NarrativeEngine(config)
+    optimizer = PortfolioOptimizer(config)
 
     if args.watch:
         print(BANNER)
